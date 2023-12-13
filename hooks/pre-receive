@@ -1,0 +1,12 @@
+#!/bin/bash
+
+while read oldrev newrev refname; do
+    # Check if the file "./package.json" is being modified
+    if git diff-tree --name-only $oldrev $newrev | grep -q "./package.json"; then
+        # Check if the person pushing is allowed to modify the file
+        if ! git log -n 1 --format=%ae $newrev | grep -q "akarshya.19je0323@me.iitism.ac.in"; then
+            echo "Permission denied: User is not allowed to modify the restricted file."
+            exit 1
+        fi
+    fi
+done
