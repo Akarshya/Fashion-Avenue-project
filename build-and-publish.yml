@@ -1,0 +1,90 @@
+# # # # Create the bitbucket-pipelines.yml file
+# # # echo "image: node:14
+# # # pipelines:
+# # #     default:
+# # #         - step:
+# # #               name: Build and Publish
+# # #               caches:
+# # #                   - node
+# # #               script:
+# # #                   - npm install
+# # #                   - npm run build
+# # #                   - npm run storybook
+# # #                   - npm version patch -m \"Bump version to %s\"
+# # #                   - npm publish
+# # # definitions:
+# # #     caches:
+# # #         node: ~/.npm" > bitbucket-pipelines.yml
+
+# # image: node:14
+
+# # pipelines:
+# #     default:
+# #         - step:
+# #               name: Build and Publish
+# #               caches:
+# #                   - node
+# #               script:
+# #                   - npm install
+# #                   - npm run build
+# #                   - npm run storybook
+# #                   - ./bump-version.sh
+# #                   - npm publish
+
+# # definitions:
+# #     caches:
+# #         node: ~/.npm
+
+# # bitbucket-pipelines.yml
+
+# image: node:14
+
+# pipelines:
+#     default:
+#         - step:
+#               name: Build and Publish
+#               caches:
+#                   - node
+#               script:
+#                   - npm install
+#                   - npm run build
+#                   - npm run storybook
+#                   - bash bump-version.sh
+#                   - npm publish
+
+# definitions:
+#     caches:
+#         node: ~/.npm
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build and test
+      run: |
+        npm run build
+        npm run storybook
+
+    - name: Bump version and publish
+      run: |
+        bash bump-version.sh
+        npm publish
+     
