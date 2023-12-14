@@ -8,7 +8,7 @@ CURRENT_VERSION=$(node -pe "require('./package.json').version")
 # Extract the numeric part of the alpha version
 ALPHA_NUMERIC=$(echo $CURRENT_VERSION | cut -d- -f2 | awk -F. '{print $2 "." $3}')
 
-# Increment the second part of the alpha versionss
+# Increment the second part of the alpha versionssss
 IFS='.' read -r -a ALPHA_PARTS <<< "$ALPHA_NUMERIC"
 ALPHA_PARTS[1]=$((ALPHA_PARTS[1] + 1))
 
