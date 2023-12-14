@@ -76,24 +76,24 @@
 
 # bitbucket-pipelines.yml
 
-image: node:14
+# image: node:14
 
-pipelines:
-  default:
-    - step:
-        name: Build and Publish
-        caches:
-          - node
-        script:
-          - npm install
-          - npm run build
-          - npm run storybook
-          - bash bump-version.sh
-          - npm publish
+# pipelines:
+#   default:
+#     - step:
+#         name: Build and Publish
+#         caches:
+#           - node
+#         script:
+#           - npm install
+#           - npm run build
+#           - npm run storybook
+#           - bash bump-version.sh
+#           - npm publish
 
-definitions:
-  caches:
-    node: ~/.npm
+# definitions:
+#   caches:
+#     node: ~/.npm
 # image: node:14
 
 # pipelines:
@@ -113,3 +113,20 @@ definitions:
 # definitions:
 #   caches:
 #     node: ~/.npm
+
+image: node:14
+
+pipelines:
+  default:
+    - step:
+        name: Build and Publish
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run build
+          - npm run storybook
+          - bash bump-version.sh
+          - git add package.json
+          - git commit -m "Bump version"
+          - npm publish
