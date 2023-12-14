@@ -5,7 +5,7 @@ BASE_VERSION="0.0.4-alpha."
 # Get the current version from package.json
 CURRENT_VERSION=$(node -pe "require('./package.json').version")
 
-# Extract the numeric part of the alpha version
+# Extract the numeric part of the alpha versiongg
 ALPHA_NUMERIC=$(echo $CURRENT_VERSION | cut -d- -f2 | awk -F. '{print $2 "." $3}')
 
 # Increment the second part of the alpha versionssssss
