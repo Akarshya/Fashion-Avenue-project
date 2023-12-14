@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Check if the commit includes changes to package.json
+if git diff --cached --name-only | grep -q '^package.json$'; then
+    # Check if the committer is allowed (replace 'x' with the actual username)
+    if [ "$(git config user.name)" != "x" ]; then
+        echo "Error: You are not allowed to modify package.json."
+        exit 1
+    fi
+fi
+
+# If no issues found, exit successfully
+exit 0
