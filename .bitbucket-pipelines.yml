@@ -76,26 +76,6 @@
 
 # bitbucket-pipelines.yml
 
-# image: node:14
-
-# pipelines:
-#   default:
-#     - step:
-#         name: Build and Publish
-#         caches:
-#           - node
-#         script:
-#           - npm install
-#           - npm run build
-#           - npm run storybook
-#           - bash bump-version.sh
-#           - npm publish
-
-# definitions:
-#   caches:
-#     node: ~/.npm
-#     node: ~/.npmsssssssssssssssssgss
-#     node: ~/.npm
 image: node:14
 
 pipelines:
@@ -108,10 +88,28 @@ pipelines:
           - npm install
           - npm run build
           - npm run storybook
-          - echo "Commit author is: $BITBUCKET_COMMIT_AUTHOR"
-          - if [ "$BITBUCKET_COMMIT_AUTHOR" = "Gangavarapu Akarshya" ]; then ./bump-version.sh; fi
+          - bash bump-version.sh
           - npm publish
 
 definitions:
   caches:
     node: ~/.npm
+# image: node:14
+
+# pipelines:
+#   default:
+#     - step:
+#         name: Build and Publish
+#         caches:
+#           - node
+#         script:
+#           - npm install
+#           - npm run build
+#           - npm run storybook
+#           - echo "Commit author is: $BITBUCKET_COMMIT_AUTHOR"
+#           - if [ "$BITBUCKET_COMMIT_AUTHOR" = "Gangavarapu Akarshya" ]; then ./bump-version.sh; fi
+#           - npm publish
+
+# definitions:
+#   caches:
+#     node: ~/.npm

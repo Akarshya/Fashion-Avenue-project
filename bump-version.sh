@@ -13,7 +13,7 @@ IFS='.' read -r -a ALPHA_PARTS <<< "$ALPHA_NUMERIC"
 ALPHA_PARTS[1]=$((ALPHA_PARTS[1] + 1))
 
 # Check if the second part reached 10 and increment the first part
-if [ ${ALaPHA_PARTS[1]} -eq 10 ]; then
+if [ ${ALPHA_PARTS[1]} -eq 10 ]; then
   ALPHA_PARTS[0]=$((ALPHA_PARTS[0] + 1))
   ALPHA_PARTS[1]=0
 fi
